@@ -204,14 +204,14 @@ void update(){
         // balls bounce off top and bottom wood strips
         // absolute value forces the y direction away from the walls so it can't get stuck
         if (pos.y - half <= WALL_H){
-            pos.y = WALL_H + half;
-            mov.y = abs(mov.y);   // push downward
+            pos.y = WALL_H + half;  // bump out
+            mov.y = abs(mov.y);   //change to correct direction
             balls[i]->setPosition(pos);
             balls[i]->setMovement(mov);
         }
         else if (pos.y + half >= SCREEN_HEIGHT - WALL_H){
-            pos.y = SCREEN_HEIGHT - WALL_H - half;
-            mov.y = -abs(mov.y);  // push upward
+            pos.y = SCREEN_HEIGHT - WALL_H - half;  // bump out
+            mov.y = -abs(mov.y);  //change to correct direction
             balls[i]->setPosition(pos);
             balls[i]->setMovement(mov);
         }
@@ -223,13 +223,13 @@ void update(){
         //actual paddle collision logic
         if (balls[i]->checkCollision(player1)){
             mov.x = abs(mov.x);   // must go right (away from P1)
-            pos.x = player1->getPosition().x + PADDLE_W / 2.0f + half + 2.0f;  // push outside paddle
+            pos.x = player1->getPosition().x + PADDLE_W / 2.0f + half + 2.0f;  // bump outside paddle
             balls[i]->setPosition(pos);
             balls[i]->setMovement(mov);
         }
         if (balls[i]->checkCollision(player2)){
             mov.x = -abs(mov.x);  // must go left (away from P2)
-            pos.x = player2->getPosition().x - PADDLE_W / 2.0f - half - 2.0f;  // push outside paddle
+            pos.x = player2->getPosition().x - PADDLE_W / 2.0f - half - 2.0f;  // bump outside paddle
             balls[i]->setPosition(pos);
             balls[i]->setMovement(mov);
         }
